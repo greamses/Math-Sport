@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Common Entrance Preparation</title>
+  <link rel="stylesheet" href="./style.css" type="text/css" media="all" />
+</head>
+
+<body>
+  <header>
+    <h1>Math-Easy</h1>
+  </header>
+
+  <div class="controls">
+    <div class="results">
+      <div class="score-display">Score: <span id="score">0</span></div>
+      <div class="timer-display">Time: <span id="timer">60</span>s</div>
+    </div>
+    <div class="volume-controls">
+      <div class="">
+
+        <label for="bgm-volume">Music:</label>
+        <input type="range" id="bgm-volume" min="0" max="1" step="0.1" value="0.5">
+      </div>
+      <div class="">
+
+        <label for="sfx-volume">SFX:</label>
+        <input type="range" id="sfx-volume" min="0" max="1" step="0.1" value="0.7">
+      </div>
+    </div>
+  </div>
+
+  <div class="sentence-display" id="sentence-display">
+    Collect the correct option math problem!
+  </div>
+
+  <div class="game-container">
+    <canvas id="gameCanvas"></canvas>
+  </div>
+
+  <div class="mobile-controls">
+    <button class="mobile-btn" id="up-btn">↑</button>
+    <button class="mobile-btn" id="left-btn">←</button>
+    <button class="mobile-btn" id="right-btn">→</button>
+    <button class="mobile-btn" id="down-btn">↓</button>
+  </div>
+
+  <div class="modal" id="startModal">
+    <div class="modal-content">
+      <h2>Welcome to <span class="logo">Math-Man!</span></h2>
+
+      <div class="scroll-container">
+        <div class="instructions">
+          <div class="instruction-card">
+            <h3>Objective</h3>
+            <p>Collect the <span class="highlight">correct solution</span> that answers math problem displayed.</p>
+          </div>
+
+          <div class="instruction-card">
+            <div class="icon">🎮</div>
+            <h3>Controls</h3>
+            <div class="control-demo">
+              <div class="key-group">
+                <div class="key">↑</div>
+                <div class="key-group-row">
+                  <div class="key">←</div>
+                  <div class="key">↓</div>
+                  <div class="key">→</div>
+                </div>
+              </div>
+              <p>or use on-screen buttons</p>
+            </div>
+          </div>
+
+          <div class="instruction-card">
+            <h3>Gameplay</h3>
+            <ul>
+              <li>Click/tap words to <span class="highlight">auto-navigate</span></li>
+              <li>Correct answers <span class="correct">+10 points</span> and teleport you</li>
+              <li>Wrong answers <span class="incorrect">end the game</span></li>
+            </ul>
+          </div>
+
+          <div class="instruction-card ghost-card">
+            <div class="icon">👻</div>
+            <h3>Meet the Ghosts</h3>
+            <div class="ghost-grid">
+              <div class="ghost-type" style="color: #ff0000">
+                <span>Chaser</span>
+              </div>
+              <div class="ghost-type" style="color: #00ff00">
+                <span>Ambush</span>
+              </div>
+              <div class="ghost-type" style="color: #0000ff">
+                <span>Random</span>
+              </div>
+              <div class="ghost-type" style="color: #ff00ff">>
+                <span>Patroller</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button id="startBtn" class="pulse-btn">Start Adventure!</button>
+    </div>
+  </div>
+  <div class="modal" id="gameOverModal">
+    <div class="modal-content">
+      <h2>Game Over!</h2>
+      <p>Your final score: <span id="final-score">0</span></p>
+      <button id="restartBtn">Play Again</button>
+    </div>
+  </div>
+
+  <audio id="eatSound" src="./music/eat.mp3" preload="auto"></audio>
+  <audio id="ghostSound" loop src="./music/ghost-voice.mp3" preload="auto"></audio>
+  <audio id="backgroundMusic" loop src="./music/Glitch.mp3" preload="auto"></audio>
+  <audio id="teleportSound" src="./music/teleport.mp3" preload="auto"></audio>
+
+  <script src="./js/index.js" type="module"></script>
+
+  <script>
+    // Add volume control functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      const bgmVolume = document.getElementById('bgm-volume');
+      const sfxVolume = document.getElementById('sfx-volume');
+      const bgMusic = document.getElementById('backgroundMusic');
+
+      // Set initial volumes
+      bgMusic.volume = bgmVolume.value;
+      document.getElementById('eatSound').volume = sfxVolume.value;
+      document.getElementById('ghostSound').volume = sfxVolume.value;
+      document.getElementById('teleportSound').volume = sfxVolume.value;
+
+      // Add event listeners for volume changes
+      bgmVolume.addEventListener('input', () => {
+        bgMusic.volume = bgmVolume.value;
+      });
+
+      sfxVolume.addEventListener('input', () => {
+        const sfxValue = sfxVolume.value;
+        document.getElementById('eatSound').volume = sfxValue;
+        document.getElementById('ghostSound').volume = sfxValue;
+        document.getElementById('teleportSound').volume = sfxValue;
+      });
+    });
+  </script>
+</body>
+
+</html>
