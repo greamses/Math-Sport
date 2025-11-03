@@ -20,6 +20,10 @@ body {
   perspective: 1000px;
 }
 
+li{
+  list-style: none;
+}
+
 header {
   width: 100%;
   padding: 25px 0;
