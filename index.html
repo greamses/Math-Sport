@@ -189,13 +189,14 @@
         }
         
         .game-image {
-            height: auto;
+            height: 200px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             border-radius: 25px 25px 0 0;
             position: relative;
+            background-color: #f0f0f0;
         }
         
         .game-image::after {
@@ -215,6 +216,12 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .game-image img.loaded {
+            opacity: 1;
         }
         
         .game-content {
@@ -304,6 +311,38 @@
             font-size: 1rem;
         }
         
+        /* Loading animation for images */
+        .game-image::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #000;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            z-index: 1;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        
+        .game-image.loaded::before {
+            opacity: 0;
+        }
+        
+        @keyframes spin {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+        
         /* Responsive Design */
         @media (max-width: 768px) {
             .games-grid {
@@ -340,61 +379,60 @@
     <script>
         // Game data with external links and images
         const gamesData = [
-    {
-        id: 1,
-        title: "Prime Blockbuster",
-        description: "Arrange prime and composite blocks to complete lines. Master number theory in this Tetris-style challenge!",
-        image: "./images/prime.jpg",
-        difficulty: "medium",
-        players: "1.2k",
-        link: "./block/tetris.html"
-    },
-    {
-        id: 2,
-        title: "Flappy Math Bird",
-        description: "Help the bird fly through math equations. Solve problems to keep flying!",
-        image: "./images/flappy-bird.jpg",
-        difficulty: "easy",
-        players: "1.5k",
-        link: "./flappy-bird/flappy.html"
-    },
-    {
-        id: 3,
-        title: "Math Puzzle Shuffle",
-        description: "Slide the tiles to solve the math puzzle. Challenge your problem-solving skills!",
-        image: "./images/sliding.jpg",
-        difficulty: "medium",
-        players: "2.3k",
-        link: "./slider/slider.html"
-    },
-    {
-        id: 4,
-        title: "Math Hangman",
-        description: "Guess the math terms before the hangman is complete. Expand your math vocabulary!",
-        image: "./images/hangman.jpg",
-        difficulty: "medium",
-        players: "925",
-        link: "./hang-man/hangman.html"
-    },
-    {
-        id: 5,
-        title: "Math Wordle",
-        description: "Find the hidden math term in six tries. A mathematical twist on the popular game!",
-        image: "./images/wordle.jpg",
-        difficulty: "hard",
-        players: "307",
-        link: "./wordle/wordle.html"
-    },
-    {
-        id: 6,
-        title: "Math Pacman",
-        description: "Navigate through the maze solving math problems to eat dots and avoid ghosts!",
-        image: "./images/pacman.jpg",
-        difficulty: "medium",
-        players: "1.8k",
-        link: "./pacman/pacman.html"
-    }
-];
+        {
+            id: 1,
+            title: "Prime Blockbuster",
+            description: "Arrange prime and composite blocks to complete lines. Master number theory in this Tetris-style challenge!",
+            image: "./images/prime.jpg",
+            difficulty: "medium",
+            players: "1.2k",
+            link: "./block/tetris.html"
+        },
+        {
+            id: 2,
+            title: "Flappy Math Bird",
+            description: "Help the bird fly through math equations. Solve problems to keep flying!",
+            image: "./images/flappy-bird.jpg",
+            difficulty: "easy",
+            players: "1.5k",
+            link: "./flappy-bird/flappy.html"
+        },
+        {
+            id: 3,
+            title: "Math Puzzle Shuffle",
+            description: "Slide the tiles to solve the math puzzle. Challenge your problem-solving skills!",
+            image: "./images/sliding.jpg",
+            difficulty: "medium",
+            players: "2.3k",
+            link: "./slider/slider.html"
+        },
+        {
+            id: 4,
+            title: "Math Hangman",
+            description: "Guess the math terms before the hangman is complete. Expand your math vocabulary!",
+            image: "./images/hangman.jpg",
+            difficulty: "medium",
+            players: "925",
+            link: "./hang-man/hangman.html"
+        },
+        {
+            id: 5,
+            title: "Math Wordle",
+            description: "Find the hidden math term in six tries. A mathematical twist on the popular game!",
+            image: "./images/wordle.jpg",
+            difficulty: "hard",
+            players: "307",
+            link: "./wordle/wordle.html"
+        },
+        {
+            id: 6,
+            title: "Math Pacman",
+            description: "Navigate through the maze solving math problems to eat dots and avoid ghosts!",
+            image: "./images/pacman.jpg",
+            difficulty: "medium",
+            players: "1.8k",
+            link: "./pacman/pacman.html"
+        }];
         
         // Function to get difficulty class
         function getDifficultyClass(difficulty) {
@@ -412,14 +450,18 @@
             }
         }
         
-        // Function to create game cards
+        // Function to create game cards with lazy loading
         function createGameCard(game) {
             const difficultyClass = getDifficultyClass(game.difficulty);
             
             return `
                 <a href="${game.link}" class="game-card">
                     <div class="game-image">
-                        <img src="${game.image}" alt="${game.title}">
+                        <img 
+                            data-src="${game.image}" 
+                            alt="${game.title}"
+                            loading="lazy"
+                        >
                     </div>
                     <div class="game-content">
                         <h3 class="game-title">${game.title}</h3>
@@ -442,6 +484,50 @@
         function loadGames() {
             const gamesContainer = document.getElementById('games-container');
             gamesContainer.innerHTML = gamesData.map(game => createGameCard(game)).join('');
+            
+            // Initialize lazy loading after DOM is populated
+            initializeLazyLoading();
+        }
+        
+        // Lazy loading implementation
+        function initializeLazyLoading() {
+            const lazyImages = document.querySelectorAll('img[data-src]');
+            
+            // If IntersectionObserver is supported
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            loadImage(img);
+                            imageObserver.unobserve(img);
+                        }
+                    });
+                });
+                
+                lazyImages.forEach(img => imageObserver.observe(img));
+            } else {
+                // Fallback for browsers without IntersectionObserver support
+                lazyImages.forEach(img => loadImage(img));
+            }
+        }
+        
+        // Function to load an individual image
+        function loadImage(img) {
+            const src = img.getAttribute('data-src');
+            if (!src) return;
+            
+            const imageElement = new Image();
+            imageElement.onload = () => {
+                img.src = src;
+                img.classList.add('loaded');
+                img.parentElement.classList.add('loaded');
+            };
+            imageElement.onerror = () => {
+                console.error(`Failed to load image: ${src}`);
+                // You could set a placeholder image here if desired
+            };
+            imageElement.src = src;
         }
         
         // Initialize the page
