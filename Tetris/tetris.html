@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cyberpunk Tetris</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"/>
+    <style>
+    :root {
+        --bg-image: url('./background.png');
+    }
+</style>
+</head>
+<body>
+    <div class="binary-rain" id="binaryRain"></div>
+    
+    <div id="score">Score: 0</div>
+    <div class="info-panel">
+        <div id="current-arrangement">Current arrangement: 0 of 0</div>
+        <div id="prime-indicator">Area: 0 (Not Prime)</div>
+    </div>
+    
+    <div id="game-container">
+        <div class="game-section">
+            <canvas id="game-board" width="800" height="960"></canvas>
+            <!-- ADD OVERLAY CONTROLS HERE -->
+            <div class="overlay-controls">
+                <div class="memory-overlay">
+                    <button id="m-minus">M-</button>
+                    <button id="m-plus">M+</button>
+                </div>
+                <div class="direction-overlay">
+                    <button id="up">↑</button>
+                    <button id="left">←</button>
+                    <button id="rotate">↻</button>
+                    <button id="right">→</button>
+                    <button id="down">↓</button>
+                </div>
+            </div>
+        </div>
+        
+        <canvas id="arrangements-canvas" width="800" height="400"></canvas>
+        
+        <!-- Keep original controls as fallback but hide them -->
+        <div class="controls fallback-controls" style="display: none;">
+            <button id="m-minus-fallback">M-</button>
+            <div class="direction">
+                <button id="left-fallback">←</button>
+                <button id="right-fallback">→</button>
+                <button id="down-fallback">↓</button>
+                <button id="rotate-fallback">R</button>
+            </div>
+            <button id="m-plus-fallback">M+</button>
+        </div>
+    </div>
+    
+    <script src="main.js"></script>
+</body> 
+</html>
