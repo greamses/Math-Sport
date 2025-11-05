@@ -583,3 +583,8 @@ body {
     padding: 8px;
   }
 }
+
+
+.hide{
+  display: none;
+}
