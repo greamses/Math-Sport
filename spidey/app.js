@@ -1,190 +1,305 @@
 const words = [
-  { // Level 1: Basic Arithmetic (1-5)
+  {
     word: "ADD",
     hints: [
-      "Hundreds place: Starts and end the word 'alpha'",
-      "Tens place: Roman numeral for 500",
-      "Units place: Repeats the first letter",
+      "Hundreds place: A",
+      "Tens place: D", 
+      "Units place: D",
+      "What you do with numbers when you put them together"
     ]
   },
   {
     word: "SUM",
     hints: [
-      "Hundreds place: Last letter in the word 'first'",
-      "Tens place: The letter between T and V",
-      "Units place: First letter of the word 'moon'",
-      "The total when numbers are combined",
+      "Hundreds place: S",
+      "Tens place: U",
+      "Units place: M",
+      "The total when you add numbers"
     ]
   },
   {
     word: "EVEN",
     hints: [
-      "Thousands place: Halfway to 'J' in the alphabet",
-      "Hundreds place: Symbol used for voltage",
-      "Tens place: First letter in the word 'example'",
-      "Units place: Always after a thousand.",
+      "Thousands place: E",
+      "Hundreds place: V", 
+      "Tens place: E",
+      "Units place: N",
+      "Numbers like 2, 4, 6, 8..."
     ]
   },
   {
     word: "AREA",
     hints: [
-      "Thousands place: The alphabet wouldn't start without it",
-      "Hundreds place: Pronounced as 'are'",
-      "Tens place: The most common vowel",
-      "Units place: Same as the first letter",
+      "Thousands place: A",
+      "Hundreds place: R",
+      "Tens place: E",
+      "Units place: A",
       "The space inside a shape"
     ]
   },
   {
     word: "PLUS",
     hints: [
-      "Thousands place: The letter after 'O'",
-      "Hundreds place: Romans chose this as number 50",
-      "Tens place and Units place: The object for 'we'",
+      "Thousands place: P",
+      "Hundreds place: L",
+      "Tens place: U",
+      "Units place: S",
       "The mathematical symbol for addition"
     ]
   },
-
-  { // Level 2: Geometry/Trigonometry (6-10)
+  {
     word: "SINE",
     hints: [
-      "Thousands place: 'Sunday' starts with it",
-      "Hundreds place: The letter between H and J",
-      "Tens place: A letter for the word 'eye'",
-      "Units place: Bees have two of it.",
+      "Thousands place: S",
+      "Hundreds place: I",
+      "Tens place: N",
+      "Units place: E",
+      "A trigonometry function"
     ]
   },
   {
     word: "AXIS",
     hints: [
-      "Thousands place: Word used before singular nouns.",
-      "Hundreds place:  Roman numeral for 10",
-      "Tens place: Center letter of 'pie'",
-      "Units place: Last letter in 'his'",
+      "Thousands place: A",
+      "Hundreds place: X",
+      "Tens place: I",
+      "Units place: S",
+      "A reference line on a graph"
     ]
   },
   {
     word: "ANGLE",
     hints: [
-      "Ten-thousands: The starting letter",
-      "Thousands: Present in 'think' but not 'thick'",
-      "Hundreds: Considered a lucky number",
-      "Tens: Letter between K and M",
-      "Units: Last letter of 'apple'",
+      "Ten-thousands place: A",
+      "Thousands place: N",
+      "Hundreds place: G",
+      "Tens place: L",
+      "Units place: E",
+      "Where two lines meet"
     ]
   },
   {
     word: "SOLID",
     hints: [
-      "Ten-thousands: First letter of 'stop'",
-      "Thousands: Nigerians think I am zero.",
-      "Hundreds: Letter between K and M",
-      "Tens: Letter between H and J",
-      "Units: First letter of 'day'",
+      "Ten-thousands place: S",
+      "Thousands place: O",
+      "Hundreds place: L",
+      "Tens place: I",
+      "Units place: D",
+      "A 3D shape"
     ]
   },
   {
     word: "PRIME",
     hints: [
-      "Ten-thousands: First letter of 'pop'",
-      "Thousands: Letter between Q and S",
-      "Hundreds: The only pronoun that can be capitalized",
-      "Tens and Units: The object of I",
+      "Ten-thousands place: P",
+      "Thousands place: R",
+      "Hundreds place: I",
+      "Tens place: M",
+      "Units place: E",
+      "Numbers like 2, 3, 5, 7..."
     ]
   },
   {
     word: "FACTOR",
     hints: [
-      "Hundred-thousands: Remove me and 'flying' would be 'lying'",
-      "Ten-thousands: The first vowel",
-      "Thousands: Third letter of alphabet",
-      "Hundreds: You can call me a beverage.",
-      "Tens: It is in 'nor' but not in 'neither'",
-      "Units: Letter between Q and S",
+      "Hundred-thousands place: F",
+      "Ten-thousands place: A",
+      "Thousands place: C",
+      "Hundreds place: T",
+      "Tens place: O",
+      "Units place: R",
+      "Numbers that divide evenly into another number"
     ]
   },
-  
-  // {
-  //   word: "INTEGER",
-  //   hints: [
-  //     "Millions: Middle letter of 'pin'",
-  //     "Hundred-thousands: Letter before O",
-  //     "Ten-thousands: First letter of 'top'",
-  //     "Thousands: Last letter of 'bee'",
-  //     "Hundreds: Lucky number seven",
-  //     "Tens: Last letter of 'bee'",
-  //     "Units: Letter between Q and S",
-  //     "Whole number (positive or negative)"
-  //   ]
-  // },
-  // {
-  //   word: "DECIMAL",
-  //   hints: [
-  //     "Millions: First letter of 'dog'",
-  //     "Hundred-thousands: Last letter of 'bee'",
-  //     "Ten-thousands: Third letter of alphabet",
-  //     "Thousands: Middle letter of 'pin'",
-  //     "Hundreds: Letter before L",
-  //     "Tens: The starting letter",
-  //     "Units: Letter between K and M",
-  //     "Number system based on ten"
-  //   ]
-  // },
-  // {
-  //   word: "POLYGON",
-  //   hints: [
-  //     "Millions: First letter of 'pop'",
-  //     "Hundred-thousands: Middle letter of 'lot'",
-  //     "Ten-thousands: Letter between U and W",
-  //     "Thousands: Lucky number seven",
-  //     "Hundreds: First letter of 'go'",
-  //     "Tens: Middle letter of 'lot'",
-  //     "Units: Letter before O",
-  //     "Many-sided plane figure"
-  //   ]
-  // },
-  // { 
-  //   // Level 5: Challenging (21-25)
-  //   word: "FORMULA",
-  //   hints: [
-  //     "Millions: First letter of 'fun'",
-  //     "Hundred-thousands: Middle letter of 'lot'",
-  //     "Ten-thousands: Letter between Q and S",
-  //     "Thousands: Letter between K and M",
-  //     "Hundreds: Letter between H and J",
-  //     "Tens: The starting letter",
-  //     "Units: First letter of 'apple'",
-  //     "Mathematical relationship expressed in symbols"
-  //   ]
-  // },
-  // {
-  //   word: "EQUATION",
-  //   hints: [
-  //     "Ten-millions: Fifth letter of alphabet",
-  //     "Millions: Letter between Q and S",
-  //     "Hundred-thousands: Letter between U and W",
-  //     "Ten-thousands: First letter of 'apple'",
-  //     "Thousands: Letter before O",
-  //     "Hundreds: Middle letter of 'pin'",
-  //     "Tens: Letter before O",
-  //     "Units: Letter before P",
-  //     "Mathematical statement of equality"
-  //   ]
-  // },
-  // {
-  //   word: "FUNCTION",
-  //   hints: [
-  //     "Ten-millions: First letter of 'fun'",
-  //     "Millions: Letter between U and W",
-  //     "Hundred-thousands: Letter before D",
-  //     "Ten-thousands: Letter before O",
-  //     "Thousands: Third letter of alphabet",
-  //     "Hundreds: Letter before O",
-  //     "Tens: Middle letter of 'pin'",
-  //     "Units: Letter before P",
-  //     "Relation between inputs and outputs"
-  //   ]
-  // },
+  {
+    word: "TWO",
+    hints: [
+      "Hundreds place: T",
+      "Tens place: W",
+      "Units place: O",
+      "The number after one"
+    ]
+  },
+  {
+    word: "TEN",
+    hints: [
+      "Hundreds place: T",
+      "Tens place: E",
+      "Units place: N",
+      "The number of fingers you have"
+    ]
+  },
+  {
+    word: "SIX",
+    hints: [
+      "Hundreds place: S",
+      "Tens place: I",
+      "Units place: X",
+      "Half a dozen"
+    ]
+  },
+  {
+    word: "FOUR",
+    hints: [
+      "Thousands place: F",
+      "Hundreds place: O",
+      "Tens place: U",
+      "Units place: R",
+      "Number of seasons in a year"
+    ]
+  },
+  {
+    word: "FIVE",
+    hints: [
+      "Thousands place: F",
+      "Hundreds place: I",
+      "Tens place: V",
+      "Units place: E",
+      "Number of toes on one foot"
+    ]
+  },
+  {
+    word: "NINE",
+    hints: [
+      "Thousands place: N",
+      "Hundreds place: I",
+      "Tens place: N",
+      "Units place: E",
+      "Number of planets in our solar system"
+    ]
+  },
+  {
+    word: "ZERO",
+    hints: [
+      "Thousands place: Z",
+      "Hundreds place: E",
+      "Tens place: R",
+      "Units place: O",
+      "The number that means nothing"
+    ]
+  },
+  {
+    word: "HALF",
+    hints: [
+      "Thousands place: H",
+      "Hundreds place: A",
+      "Tens place: L",
+      "Units place: F",
+      "Fifty percent of something"
+    ]
+  },
+  {
+    word: "WHOLE",
+    hints: [
+      "Ten-thousands place: W",
+      "Thousands place: H",
+      "Hundreds place: O",
+      "Tens place: L",
+      "Units place: E",
+      "Complete, not divided"
+    ]
+  },
+  {
+    word: "TIMES",
+    hints: [
+      "Ten-thousands place: T",
+      "Thousands place: I",
+      "Hundreds place: M",
+      "Tens place: E",
+      "Units place: S",
+      "Another word for multiplication"
+    ]
+  },
+  {
+    word: "EQUAL",
+    hints: [
+      "Ten-thousands place: E",
+      "Thousands place: Q",
+      "Hundreds place: U",
+      "Tens place: A",
+      "Units place: L",
+      "The same as"
+    ]
+  },
+  {
+    word: "MINUS",
+    hints: [
+      "Ten-thousands place: M",
+      "Thousands place: I",
+      "Hundreds place: N",
+      "Tens place: U",
+      "Units place: S",
+      "Another word for subtraction"
+    ]
+  },
+  {
+    word: "TOTAL",
+    hints: [
+      "Ten-thousands place: T",
+      "Thousands place: O",
+      "Hundreds place: T",
+      "Tens place: A",
+      "Units place: L",
+      "The final amount"
+    ]
+  },
+  {
+    word: "COUNT",
+    hints: [
+      "Ten-thousands place: C",
+      "Thousands place: O",
+      "Hundreds place: U",
+      "Tens place: N",
+      "Units place: T",
+      "Say numbers in order"
+    ]
+  },
+  {
+    word: "VALUE",
+    hints: [
+      "Ten-thousands place: V",
+      "Thousands place: A",
+      "Hundreds place: L",
+      "Tens place: U",
+      "Units place: E",
+      "How much something is worth"
+    ]
+  },
+  {
+    word: "POINT",
+    hints: [
+      "Ten-thousands place: P",
+      "Thousands place: O",
+      "Hundreds place: I",
+      "Tens place: N",
+      "Units place: T",
+      "A dot in decimals"
+    ]
+  },
+  {
+    word: "SHAPE",
+    hints: [
+      "Ten-thousands place: S",
+      "Thousands place: H",
+      "Hundreds place: A",
+      "Tens place: P",
+      "Units place: E",
+      "Circle, square, or triangle"
+    ]
+  },
+  {
+    word: "SQUARE",
+    hints: [
+      "Hundred-thousands place: S",
+      "Ten-thousands place: Q",
+      "Thousands place: U",
+      "Hundreds place: A",
+      "Tens place: R",
+      "Units place: E",
+      "A shape with four equal sides"
+    ]
+  }
 ];
 
 let currentWord;
@@ -193,6 +308,8 @@ let shuffledHints;
 let currentHintIndex;
 let score = 0;
 let isMusicPlaying = false;
+let wordIndex = 0;
+let wordRepeatCount = 0;
 
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -203,11 +320,18 @@ function shuffleArray(array) {
 }
 
 function initGame() {
-  const randomIndex = Math.floor(Math.random() * words.length);
-  currentWord = words[randomIndex].word;
-  currentHints = words[randomIndex].hints;
+  // If we've shown current word twice, move to next word
+  if (wordRepeatCount >= 2) {
+    wordIndex = (wordIndex + 1) % words.length;
+    wordRepeatCount = 0;
+  }
+  
+  currentWord = words[wordIndex].word;
+  currentHints = words[wordIndex].hints;
   shuffledHints = shuffleArray([...currentHints]);
   currentHintIndex = 0;
+  wordRepeatCount++;
+  
   updateDisplay();
 }
 
