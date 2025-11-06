@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Mystery Word Game</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2&family=Fredoka+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h2>Web Word Game</h2>
+    <div class="game-container">
+        <div class="score" id="score">Score: 0</div>
+        <div class="word-display" id="wordDisplay"></div>
+        <div class="hint" id="hint"></div>
+        <button onclick="nextHint()">Next Hint</button>
+        <button onclick="checkWord()">Submit</button>
+        <div class="message" id="message"></div>
+        
+        <!-- Music Controls -->
+        <div class="music-controls">
+            <button id="playPauseButton" onclick="playMusic()">Play Music</button>
+            <div>
+                <label id="volumeLabel">Volume: 100%</label>
+                <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="1" onchange="changeVolume(this.value)">
+            </div>
+        </div>
+    </div>
+    
+    <audio id="backgroundMusic" loop>
+      <source src="spiderman.mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
+    
+    <script src="./app.js"></script>
+</body>
+</html>
