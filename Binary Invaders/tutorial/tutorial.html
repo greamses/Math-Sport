@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Blaster — Tutorial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./tutorial.css">
+</head>
+
+<body>
+    <div class="binary-bg" id="binary-bg"></div>
+    
+    <div class="tutorial-container">
+        <div class="corner-accent tr"></div>
+        <div class="corner-accent bl"></div>
+        
+        <div class="header">
+            <div class="brand">BINARY BLASTER</div>
+            <div class="headline">4-BIT TRAINING</div>
+        </div>
+        
+        <div class="step-indicator">
+            <div class="step-dot active" data-step="0"></div>
+            <div class="step-dot" data-step="1"></div>
+            <div class="step-dot" data-step="2"></div>
+            <!-- Dynamic step dots will be inserted here -->
+        </div>
+        
+        <!-- Step 0: Introduction -->
+        <div class="tutorial-step active" data-step="0">
+            <div class="step-content">
+                <div class="step-title">WELCOME, OPERATIVE</div>
+                <div class="step-description">
+                    The digital frontier is under attack! Enemy code is flooding the network, and only you can stop it by converting decimal numbers to binary code.
+                </div>
+                <div class="info-box">
+                    <strong>YOUR MISSION:</strong> Convert decimal numbers (1-15) to their 4-bit binary equivalents. Toggle each bit ON (1) or OFF (0) to form the correct attack code!
+                </div>
+                <div class="demo-area" style="min-height: 150px;">
+                    <div style="font-size: 3rem; color: var(--neon);">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M0 0h24v24H0z" fill="none" />
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" />
+                        </svg>
+                    </div>
+                    <div style="text-align: center; color: var(--muted);">
+                        10 Binary Challenges Ahead
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Step 1: Binary Basics -->
+        <div class="tutorial-step" data-step="1">
+            <div class="step-content">
+                <div class="step-title">BINARY BASICS</div>
+                <div class="step-description">
+                    Binary uses only 0s and 1s. Each position represents a power of 2 from left to right: 8, 4, 2, 1
+                </div>
+                
+                <div class="place-value-diagram">
+                    <div class="place-value-item">
+                        <div class="place-value-bit">1</div>
+                        <div class="place-value-label">8</div>
+                    </div>
+                    <div class="place-value-item">
+                        <div class="place-value-bit">1</div>
+                        <div class="place-value-label">4</div>
+                    </div>
+                    <div class="place-value-item">
+                        <div class="place-value-bit">1</div>
+                        <div class="place-value-label">2</div>
+                    </div>
+                    <div class="place-value-item">
+                        <div class="place-value-bit">1</div>
+                        <div class="place-value-label">1</div>
+                    </div>
+                </div>
+                
+                <div class="info-box">
+                    <strong>HOW IT WORKS:</strong> Each bit position has a value. Add up the values of all the "1" bits to get the decimal number.<br><br>
+                    <strong>EXAMPLE:</strong> 5 = 4 + 1 = 0 1 0 1<br>
+                    <strong>EXAMPLE:</strong> 9 = 8 + 1 = 1 0 0 1<br>
+                    <strong>EXAMPLE:</strong> 12 = 8 + 4 = 1 1 0 0
+                </div>
+            </div>
+        </div>
+        
+        <!-- Step 2: How to Toggle -->
+        <div class="tutorial-step" data-step="2">
+            <div class="step-content">
+                <div class="step-title">TOGGLE SYSTEM</div>
+                <div class="step-description">
+                    Click each bit to toggle between 0 (OFF) and 1 (ON). The numbers below show the value of each position.
+                </div>
+                
+                <div class="demo-area">
+                    <div class="target-label">PRACTICE TOGGLING:</div>
+                    <div class="target-number">Try It!</div>
+                    <div class="binary-input" id="toggle-demo">
+                        <button class="bit-toggle" data-bit="3">0<span class="bit-label">8</span></button>
+                        <button class="bit-toggle" data-bit="2">0<span class="bit-label">4</span></button>
+                        <button class="bit-toggle" data-bit="1">0<span class="bit-label">2</span></button>
+                        <button class="bit-toggle" data-bit="0">0<span class="bit-label">1</span></button>
+                    </div>
+                    <div class="current-value" id="demo-value">Current Value: 0</div>
+                </div>
+                
+                <div class="info-box">
+                    <strong>TOGGLE MECHANICS:</strong><br>
+                    • Click any bit to switch between 0 and 1<br>
+                    • Watch the current value update in real-time<br>
+                    • Green bits are ON (1), gray bits are OFF (0)<br>
+                    • Practice toggling to understand the system
+                </div>
+            </div>
+        </div>
+        
+        <!-- Practice Questions will be dynamically inserted here -->
+        <div id="practice-questions-container"></div>
+        
+        <!-- Completion Step -->
+        <div class="tutorial-step" data-step="13">
+            <div class="step-content">
+                <div class="step-title">TRAINING COMPLETE!</div>
+                <div class="step-description">
+                    Excellent work, operative! You've mastered 4-bit binary conversion and are ready to defend the digital frontier.
+                </div>
+                
+                <div class="demo-area" style="min-height: 200px;">
+                    <div style="font-size: 4rem; color: var(--success);"></div>
+                    <div id="final-score" class="target-number" style="color: var(--success);">0/10</div>
+                    <div id="accuracy-rating" style="color: var(--muted);">Calculating...</div>
+                </div>
+                
+                <div class="info-box">
+                    <strong>MISSION ACCOMPLISHED:</strong><br>
+                    • Completed 10 binary conversion challenges<br>
+                    • Mastered 4-bit binary system<br>
+                    • Ready for full 8-bit combat<br>
+                    • Digital frontier secured!
+                </div>
+            </div>
+        </div>
+        
+        <div class="nav-controls">
+            <button class="arrow-btn prev" id="prev-btn" disabled>
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+                </svg>
+            </button>
+            <a href="./index.html">
+                <button class="menu-btn-center" id="menu-btn">MAIN MENU</button>
+            </a>
+            
+            <button class="arrow-btn next primary" id="next-btn">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+    
+    <script src="./tutorial.js"></script>
+</body>
+
+</html>
