@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Invader</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="game.css">
+</head>
+
+<body>
+    <div class="binary-bg" id="binary-bg"></div>
+    
+    <div class="game-container">
+        <canvas id="gameCanvas"></canvas>
+        
+        <div class="hud">
+            <div class="score">SCORE: <span id="score">0</span></div>
+            <div class="health">HEALTH: <span id="healthText">100%</span></div>
+            
+            <!-- Add these to your existing HUD -->
+            <div id="comboDisplay" style="position: absolute; top: 10px; right: 10px; color: #ffff00; font-family: 'Courier New', monospace; font-size: 14px;"></div>
+            <div id="hitsDisplay" style="position: absolute; top: 30px; right: 10px; color: #ff6666; font-family: 'Courier New', monospace; font-size: 14px;"></div>
+            <div id="sprayDisplay" style="position: absolute; top: 50px; right: 10px; color: #ffff00; font-family: 'Courier New', monospace; font-size: 14px;"></div>
+        </div>
+        
+        <div class="binary-interface">
+            <div class="target-display hide">
+                <span id="targetNumber">5</span>
+            </div>
+            <div class="binary-input-row">
+                <div class="binary-input">
+                    <button class="bit-toggle" data-bit="3">0<span class="bit-label">8</span></button>
+                    <button class="bit-toggle" data-bit="2">0<span class="bit-label">4</span></button>
+                    <button class="bit-toggle" data-bit="1">0<span class="bit-label">2</span></button>
+                    <button class="bit-toggle" data-bit="0">0<span class="bit-label">1</span></button>
+                </div>
+                <button class="fire-btn-svg" id="attackBtn" title="Fire Binary Missile">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 11V3L21.5 11.5L13 20V16C8.5 16 5.5 17.5 3 21C4 15 6.5 10 13 11Z" fill="currentColor" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <div class="controls-info">
+            <strong>CONTROLS:</strong><br>
+            • Use direction buttons or touch to move<br>
+            • Toggle bits for attack code<br>
+            • Press fire button to attack
+        </div>
+        
+        <div class="direction-controls">
+            <div class="direction-row">
+                <button class="dir-btn" id="leftBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+                    </svg>
+                </button>
+                <button class="dir-btn" id="upBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
+                    </svg>
+                </button>
+                <button class="dir-btn" id="rightBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+                    </svg>
+                </button>
+            </div>
+            <div class="direction-row">
+                <button class="dir-btn" id="downBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <div class="target-display-center">
+            <span id="centerTargetNumber">5</span>
+        </div>
+        
+        <div class="binary-feedback" id="binaryFeedback"></div>
+        
+        <div class="game-over" id="gameOver">
+            <h2>MISSION FAILED</h2>
+            <div>Final Score: <span id="finalScore">0</span></div>
+            <button class="restart-btn" onclick="restartGame()">RETRY MISSION</button>
+        </div>
+        
+        <div class="victory-screen" id="victoryScreen">
+            <h2>MISSION ACCOMPLISHED!</h2>
+            <div>Final Score: <span id="victoryScore">0</span></div>
+            <div>Enemies Destroyed: <span id="enemiesDestroyed">0</span></div>
+            <button class="restart-btn" onclick="restartGame()">NEW MISSION</button>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+
+</html>

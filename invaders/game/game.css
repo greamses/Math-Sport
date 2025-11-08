@@ -1,0 +1,679 @@
+/* BinaryInvader Game CSS */
+/* ====================== */
+
+/* CSS Variables for Consistent Styling */
+:root {
+  --neon: #35f0ff;
+  --neon-glow: rgba(53, 240, 255, 0.15);
+  --glass-bg: rgba(10, 18, 28, 0.15);
+  --glass-bg-tp: rgba(10, 18, 28, 0.25);
+  --glass-border: rgba(54, 240, 255, 0.18);
+  --text-light: #eafcff;
+  --muted: rgba(230, 245, 255, 0.65);
+  --dark-bg: #0a121c;
+  --accent: #ff2a6d;
+  --success: #00ff88;
+  --warning: #ffaa00;
+}
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Rajdhani', sans-serif;
+  background: var(--dark-bg);
+  color: var(--text-light);
+  overflow: hidden;
+  touch-action: manipulation;
+  height: 100vh;
+}
+
+/* Game Container */
+.game-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background:
+    radial-gradient(circle at 20% 80%, rgba(53, 240, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 42, 109, 0.1) 0%, transparent 50%),
+    linear-gradient(135deg, #0a121c 0%, #0a1a2a 100%);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(2px) saturate(120%);
+  -webkit-backdrop-filter: blur(2px) saturate(120%);
+  position: relative;
+  clip-path: polygon(0 12px, 12px 0, calc(100% - 12px) 0, 100% 12px,
+      100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px));
+  animation: borderPulse 4s infinite alternate;
+}
+
+@keyframes borderPulse {
+  0% {
+    box-shadow:
+      0 0 40px rgba(0, 0, 0, 0.7),
+      inset 0 0 60px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(53, 240, 255, 0.1),
+      0 0 30px rgba(53, 240, 255, 0.3),
+      inset 0 0 20px rgba(53, 240, 255, 0.1);
+  }
+  
+  100% {
+    box-shadow:
+      0 0 40px rgba(0, 0, 0, 0.7),
+      inset 0 0 60px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(53, 240, 255, 0.1),
+      0 0 45px rgba(53, 240, 255, 0.5),
+      inset 0 0 25px rgba(53, 240, 255, 0.15);
+  }
+}
+
+.game-container::before,
+.game-container::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--neon);
+  opacity: 0.8;
+  box-shadow: 0 0 10px var(--neon-glow);
+  z-index: 10;
+}
+
+.game-container::before {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.game-container::after {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+
+.corner-accent {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--neon);
+  opacity: 0.8;
+  box-shadow: 0 0 10px var(--neon-glow);
+  z-index: 10;
+}
+
+.corner-accent.tr {
+  top: 0;
+  right: 0;
+  border-left: none;
+  border-bottom: none;
+}
+
+.corner-accent.bl {
+  bottom: 0;
+  left: 0;
+  border-right: none;
+  border-top: none;
+}
+
+/* Canvas */
+#gameCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* HUD Elements */
+.hud {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+  background: var(--glass-bg);
+  padding: 16px;
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px,
+      100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));
+}
+
+.score {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--neon);
+  text-shadow: 0 0 10px var(--neon-glow);
+  margin-bottom: 12px;
+}
+
+.health {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+/* Binary Interface */
+.binary-interface {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: transparent;
+  padding: 20px;
+  z-index: 10;
+  min-width: 400px;
+}
+
+.target-display {
+  text-align: center;
+  margin-bottom: 16px;
+  font-family: 'Orbitron', monospace;
+  font-size: 1.1rem;
+  color: var(--text-light);
+}
+
+.target-display span {
+  color: var(--neon);
+  text-shadow: 0 0 10px var(--neon-glow);
+  font-weight: 700;
+}
+
+.binary-input-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  justify-content: center;
+}
+
+.binary-input {
+  display: flex;
+  gap: 8px;
+}
+
+.bit-toggle {
+  width: 50px;
+  height: 50px;
+  background: rgba(20, 30, 40, 0.6);
+  border: 2px solid rgba(53, 240, 255, 0.3);
+  color: rgba(255, 255, 255, 0.5);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  clip-path: polygon(0 6px, 6px 0, calc(100% - 6px) 0, 100% 6px,
+      100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0 calc(100% - 6px));
+}
+
+.bit-toggle:hover:not(:disabled) {
+  border-color: rgba(53, 240, 255, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(53, 240, 255, 0.3);
+}
+
+.bit-toggle.active {
+  background: rgba(53, 240, 255, 0.15);
+  border-color: var(--neon);
+  color: var(--neon);
+  box-shadow:
+    0 0 20px rgba(53, 240, 255, 0.4),
+    inset 0 0 20px rgba(53, 240, 255, 0.1);
+  text-shadow: 0 0 10px var(--neon-glow);
+}
+
+.bit-toggle:active {
+  transform: scale(0.95);
+}
+
+.bit-toggle:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.bit-label {
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  color: var(--muted);
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.fire-btn-svg {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, rgba(255, 42, 109, 0.3), rgba(255, 42, 109, 0.1));
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px,
+      100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.fire-btn-svg:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(255, 42, 109, 0.5), rgba(255, 42, 109, 0.2));
+  box-shadow: 0 0 30px rgba(255, 42, 109, 0.6);
+  transform: translateY(-3px);
+  color: #ff5599;
+}
+
+.fire-btn-svg:active:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.fire-btn-svg:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.fire-btn-svg svg {
+  width: 24px;
+  height: 24px;
+  filter: drop-shadow(0 0 8px rgba(255, 42, 109, 0.6));
+}
+
+/* Direction Controls */
+.direction-controls {
+  position: absolute;
+  bottom: 120px;
+  left: 20px;
+  z-index: 10;
+  padding: 16px;
+}
+
+.direction-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.direction-row:last-child {
+  margin-bottom: 0;
+  justify-content: center;
+}
+
+.dir-btn {
+  width: 50px;
+  height: 50px;
+  background: rgba(20, 30, 40, 0.6);
+  border: 2px solid rgba(53, 240, 255, 0.3);
+  color: var(--neon);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  clip-path: polygon(0 6px, 6px 0, calc(100% - 6px) 0, 100% 6px,
+      100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0 calc(100% - 6px));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.dir-btn:hover:not(:disabled) {
+  border-color: rgba(53, 240, 255, 0.6);
+  box-shadow: 0 0 20px rgba(53, 240, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.dir-btn:active:not(:disabled) {
+  background: rgba(53, 240, 255, 0.15);
+  transform: translateY(0);
+}
+
+.dir-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.dir-btn svg {
+  width: 20px;
+  height: 20px;
+  filter: drop-shadow(0 0 5px var(--neon-glow));
+}
+
+/* Controls Info */
+.controls-info {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: var(--glass-bg);
+  padding: 16px;
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px,
+      100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));
+  font-size: 0.8rem;
+  max-width: 200px;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+.controls-info strong {
+  color: var(--neon);
+  font-family: 'Orbitron', monospace;
+}
+
+/* Target Display */
+.target-display-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 4rem;
+  color: var(--neon);
+  background: var(--glass-bg-tp);
+  padding: 30px 50px;
+  border: 2px solid var(--glass-border);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(10px);
+  clip-path: polygon(0 12px, 12px 0, calc(100% - 12px) 0, 100% 12px,
+      100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px));
+  z-index: 5;
+  text-shadow: 0 0 20px var(--neon-glow);
+  font-family: 'Orbitron', monospace;
+  font-weight: 900;
+  animation: targetGlow 2s infinite alternate;
+}
+
+@keyframes targetGlow {
+  0% {
+    text-shadow: 0 0 20px var(--neon-glow);
+    box-shadow:
+      0 0 30px rgba(53, 240, 255, 0.3),
+      inset 0 0 30px rgba(53, 240, 255, 0.1);
+  }
+  
+  100% {
+    text-shadow: 0 0 40px var(--neon-glow), 0 0 60px var(--neon-glow);
+    box-shadow:
+      0 0 50px rgba(53, 240, 255, 0.5),
+      inset 0 0 40px rgba(53, 240, 255, 0.15);
+  }
+}
+
+/* Feedback Elements */
+.binary-feedback {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+  color: var(--neon);
+  background: var(--glass-bg);
+  padding: 20px 30px;
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px,
+      100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));
+  display: none;
+  z-index: 50;
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Game Over and Victory Screens */
+.game-over,
+.victory-screen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--glass-bg);
+  padding: 40px;
+  border: 2px solid var(--glass-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  clip-path: polygon(0 12px, 12px 0, calc(100% - 12px) 0, 100% 12px,
+      100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px));
+  text-align: center;
+  z-index: 100;
+  display: none;
+  min-width: 300px;
+}
+
+.game-over h2,
+.victory-screen h2 {
+  font-family: 'Orbitron', monospace;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.game-over h2 {
+  color: var(--accent);
+  text-shadow: 0 0 20px rgba(255, 42, 109, 0.6);
+}
+
+.victory-screen h2 {
+  color: var(--success);
+  text-shadow: 0 0 20px rgba(0, 255, 136, 0.6);
+}
+
+/* Buttons */
+.restart-btn {
+  background: linear-gradient(135deg, rgba(53, 240, 255, 0.3), rgba(53, 240, 255, 0.1));
+  border: 2px solid var(--neon);
+  color: var(--text-light);
+  padding: 15px 30px;
+  font-family: 'Orbitron', monospace;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px,
+      100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));
+  text-transform: uppercase;
+  margin-top: 20px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.restart-btn:hover {
+  background: linear-gradient(135deg, rgba(53, 240, 255, 0.5), rgba(53, 240, 255, 0.2));
+  box-shadow: 0 0 30px var(--neon-glow);
+  transform: translateY(-3px);
+}
+
+/* Explosions */
+.explosion {
+  position: absolute;
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* Binary Background Animation */
+.binary-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.03;
+  z-index: -1;
+  font-family: "Share Tech Mono", monospace;
+  color: var(--neon);
+  font-size: 14px;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.binary-digit {
+  position: absolute;
+  animation: float 15s infinite linear;
+  text-shadow: 0 0 5px var(--neon-glow);
+}
+
+.feedback {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 18px;
+  z-index: 1000;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh);
+  }
+  
+  100% {
+    transform: translateY(-100px);
+  }
+}
+
+/* Utility Classes */
+.hide {
+  display: none;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+
+  .hud,
+  .controls-info {
+    padding: 12px;
+    font-size: 0.8rem;
+  }
+  
+  .binary-interface {
+    padding: 15px;
+    min-width: 350px;
+  }
+  
+  .bit-toggle {
+    width: 45px;
+    height: 45px;
+    font-size: 1.1rem;
+  }
+  
+  .target-display-center {
+    font-size: 3rem;
+    padding: 20px 30px;
+  }
+  
+  .game-over,
+  .victory-screen {
+    padding: 30px;
+    min-width: 280px;
+  }
+  
+  .game-over h2,
+  .victory-screen h2 {
+    font-size: 2rem;
+  }
+  
+  .direction-controls {
+    bottom: 140px;
+    padding: 12px;
+  }
+  
+  .dir-btn {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .dir-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .binary-input-row {
+    gap: 12px;
+  }
+  
+  .fire-btn-svg {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .fire-btn-svg svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .binary-input {
+    gap: 4px;
+  }
+  
+  .bit-toggle {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  
+  .target-display-center {
+    font-size: 2.5rem;
+    padding: 15px 25px;
+  }
+  
+  .controls-info {
+    display: none;
+  }
+  
+  .direction-controls {
+    bottom: 150px;
+    left: 10px;
+    padding: 10px;
+  }
+  
+  .dir-btn {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .dir-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .binary-input-row {
+    gap: 8px;
+  }
+  
+  .fire-btn-svg {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .fire-btn-svg svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .binary-interface {
+    min-width: 320px;
+    padding: 15px;
+  }
+}
