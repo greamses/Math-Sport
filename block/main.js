@@ -66,7 +66,8 @@ class Piece {
         this.color = shape.color;
         this.glassColor = glassColors[shapes.indexOf(shape)];
         this.x = Math.floor(cols / 2) - Math.floor(this.arrangement[0] / 2);
-        this.y = 0;
+        // Start above the board (negative Y so piece enters gradually)
+        this.y = -this.arrangement[1];
         this.updatePrimeIndicator();
     }
     
@@ -80,19 +81,24 @@ class Piece {
         const [width, height] = this.arrangement;
         
         // Draw current piece only - NO GHOST
+        // Only draw blocks that are within the visible canvas (y >= 0)
         for (let row = 0; row < height; row++) {
             for (let col = 0; col < width; col++) {
-                this.drawGlassyBlock(
-                    (this.x + col) * blockSize,
-                    (this.y + row) * blockSize,
-                    blockSize - 2,
-                    blockSize - 2
-                );
+                const blockY = this.y + row;
+                // Only draw if the block is visible (not above the canvas)
+                if (blockY >= 0) {
+                    this.drawGlassyBlock(
+                        (this.x + col) * blockSize,
+                        blockY * blockSize,
+                        blockSize - 2,
+                        blockSize - 2
+                    );
+                }
             }
         }
         
-        // Prime indicator border
-        if (this.shape.isPrime) {
+        // Prime indicator border - only show if piece is visible
+        if (this.shape.isPrime && this.y >= 0) {
             ctx.strokeStyle = '#FF4500';
             ctx.lineWidth = 2;
             ctx.setLineDash([8, 8]);
